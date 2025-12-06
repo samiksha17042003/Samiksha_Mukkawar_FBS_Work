@@ -1,0 +1,79 @@
+SET-B
+FRN-16J0825/019 
+
+Q1:-
+select name from customer
+order by name;
+
+Q2
+select * from product
+order by price desc
+limit 10;
+
+Q3
+select salary from employees 
+order by salary desc
+limit 1,2;
+
+Q4
+select city,count(customer_id)from customer
+group by city;
+
+Q5
+select dep_id,sum(salary),count(*) from employees
+where salary>2,00,000
+group by dep_id;
+
+Q6
+select phone-number,customer from customername
+where like phone-number(%d____) and
+customername(___%S);
+
+
+Q7
+select product_name locate ("Pro", product_name);
+
+Q8
+
+
+
+Q9
+select count(*) from order
+where order_date in (month(year));
+
+Q10
+(select dep_id,salary from employee
+group by dep_id,
+order by salary
+limit 1)
+union 
+(select dep_id salary from employee
+group by dep_id,
+order by salary desc
+limit 1)
+
+ 
+Q11
+a]Data
+
+Q12
+a} ORDER BY DESC
+
+Q13
+a}ASC
+
+Q14
+c] 15.7
+
+Q15
+COUNT()
+
+Q16
+select count(customer_id),avg(total_amount)from order
+group by customer_id
+having count(*)>2;
+
+Q17
+select count(sale_id) from sales
+group by sale_id
+having count(*)>50;

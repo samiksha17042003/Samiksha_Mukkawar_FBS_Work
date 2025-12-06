@@ -1,0 +1,273 @@
+Q1.Write a query to display the names (first_name, last_name) using alias
+name “First Name", "Last Name".
+mysql> select  first_name"First Name",last_name"Last Name" from employee;
++------------+-----------+
+| First Name | Last Name |
++------------+-----------+
+| Steven     | King      |
+| Neena      | Kochhar   |
+| Lex        | De Haan   |
+| Alexander  | Hunold    |
+| Bruce      | Ernst     |
+| David      | Austin    |
+| Valli      | Pataballa |
+| Diana      | Lorentz   |
+| Nancy      | Greenberg |
+| Daniel     | Faviet    |
++------------+-----------+
+
+Q2.Write a query to get unique department ID from employee table.
+mysql> select distinct department_id from employee;
++---------------+
+| department_id |
++---------------+
+|            60 |
+|            30 |
+|            80 |
+|            10 |
++---------------+
+
+Q3.Write a query to get all employee details from the employee table order
+by first name, descending
+mysql> select * from employee
+    -> order by first_name desc;
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+| employee_id | first_name | last_name | email         | phone_number | hire_date  | JOB_ID  | salary | commission | manager_id | department_id | COMMISSION_PCT |
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+|         106 | Valli      | Pataballa | not available | 590.423.4560 | 1987-06-23 | IT_PROG |   5280 |       NULL |        103 |            60 |              0 |
+|         100 | Steven     | King      | not available | 515.123.4567 | 1987-06-17 | AD_PRES |  26400 |       NULL |        200 |            10 |              0 |
+|         101 | Neena      | Kochhar   | not available | 515.123.4568 | 1987-06-18 | AD_VP   |  18700 |       NULL |        200 |            10 |              0 |
+|         108 | Nancy      | Greenberg | not available | 515.124.4569 | 1987-06-25 | SA_MAN  |  13200 |       NULL |        145 |            80 |              0 |
+|         102 | Lex        | De Haan   | not available | 515.123.4569 | 1987-06-19 | AD_VP   |  18700 |       NULL |        200 |            10 |              0 |
+|         107 | Diana      | Lorentz   | not available | 590.423.5567 | 1987-06-24 | IT_PROG |   4620 |       NULL |        114 |            30 |              0 |
+|         105 | David      | Austin    | not available | 590.423.4569 | 1987-06-22 | IT_PROG |   5280 |       NULL |        103 |            60 |              0 |
+|         109 | Daniel     | Faviet    | not available | 515.124.4169 | 1987-06-26 | SA_MAN  |   9900 |       NULL |        145 |            80 |              0 |
+|         104 | Bruce      | Ernst     | not available | 590.423.4568 | 1987-06-21 | IT_PROG |   6600 |       NULL |        103 |            60 |              0 |
+|         103 | Alexander  | Hunold    | not available | 590.423.4567 | 1987-06-20 | IT_PROG |   9900 |       NULL |        103 |            60 |              0 |
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+
+Q4.Write a query to get the names (first_name, last_name), salary, PF of all
+the employees (PF is calculated as 15% of salary).
+mysql> select first_name,last_name,salary,salary*0.15 "PF" from employee;
++------------+-----------+--------+---------+
+| first_name | last_name | salary | PF      |
++------------+-----------+--------+---------+
+| Steven     | King      |  26400 | 3960.00 |
+| Neena      | Kochhar   |  18700 | 2805.00 |
+| Lex        | De Haan   |  18700 | 2805.00 |
+| Alexander  | Hunold    |   9900 | 1485.00 |
+| Bruce      | Ernst     |   6600 |  990.00 |
+| David      | Austin    |   5280 |  792.00 |
+| Valli      | Pataballa |   5280 |  792.00 |
+| Diana      | Lorentz   |   4620 |  693.00 |
+| Nancy      | Greenberg |  13200 | 1980.00 |
+| Daniel     | Faviet    |   9900 | 1485.00 |
++------------+-----------+--------+---------+
+
+Q5.Write a query to get the employee ID, names (first_name, last_name),
+salary in ascending order of salary.
+mysql> select  employee_id,first_name,last_name,salary from employee
+    -> order by salary;
++-------------+------------+-----------+--------+
+| employee_id | first_name | last_name | salary |
++-------------+------------+-----------+--------+
+|         107 | Diana      | Lorentz   |   4620 |
+|         105 | David      | Austin    |   5280 |
+|         106 | Valli      | Pataballa |   5280 |
+|         104 | Bruce      | Ernst     |   6600 |
+|         103 | Alexander  | Hunold    |   9900 |
+|         109 | Daniel     | Faviet    |   9900 |
+|         108 | Nancy      | Greenberg |  13200 |
+|         101 | Neena      | Kochhar   |  18700 |
+|         102 | Lex        | De Haan   |  18700 |
+|         100 | Steven     | King      |  26400 |
++-------------+------------+-----------+--------+
+
+Q6.Write a query to get the total salaries payable to employees.
+mysql> select sum(salary) from employee;
++-------------+
+| sum(salary) |
++-------------+
+|      118580 |
++-------------+
+
+Q7. Write a query to get the maximum and minimum salary from employees
+table.
+mysql> (select * from employee
+    -> order by salary limit 1)
+    -> union
+    -> (select * from employee
+    -> order by salary desc limit 1);
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+| employee_id | first_name | last_name | email         | phone_number | hire_date  | JOB_ID  | salary | commission | manager_id | department_id | COMMISSION_PCT |
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+|         107 | Diana      | Lorentz   | not available | 590.423.5567 | 1987-06-24 | IT_PROG |   4620 |       NULL |        114 |            30 |              0 |
+|         100 | Steven     | King      | not available | 515.123.4567 | 1987-06-17 | AD_PRES |  26400 |       NULL |        200 |            10 |              0 |
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+2 rows in set (0.01 sec)
+
+Q8. Write a query to get the average salary and number of employees in the
+employees table.
+mysql> select count( employee_id) as total_employees ,avg(salary) as average_salary  from employee ;
++-----------------+----------------+
+| total_employees | average_salary |
++-----------------+----------------+
+|              10 |     11858.0000 |
++-----------------+----------------+
+
+Q9. Write a query to get the number of employees working with the
+company.
+mysql> select count(*) "total_employees" from employee;
++-----------------+
+| total_employees |
++-----------------+
+|              10 |
++-----------------+
+
+Q10.Write a query to get the number of jobs available in the employees table.
+mysql> select  JOB_ID,count(*) from employee
+    -> group by  JOB_ID;
++---------+----------+
+| JOB_ID  | count(*) |
++---------+----------+
+| AD_PRES |        1 |
+| AD_VP   |        2 |
+| IT_PROG |        5 |
+| SA_MAN  |        2 |
++---------+----------+
+
+Q11.Write a query to select first 10 records from a table.
+mysql> select * from employee limit 10;
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+| employee_id | first_name | last_name | email         | phone_number | hire_date  | JOB_ID  | salary | commission | manager_id | department_id | COMMISSION_PCT |
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+|         100 | Steven     | King      | not available | 515.123.4567 | 1987-06-17 | AD_PRES |  26400 |       NULL |        200 |            10 |              0 |
+|         101 | Neena      | Kochhar   | not available | 515.123.4568 | 1987-06-18 | AD_VP   |  18700 |       NULL |        200 |            10 |              0 |
+|         102 | Lex        | De Haan   | not available | 515.123.4569 | 1987-06-19 | AD_VP   |  18700 |       NULL |        200 |            10 |              0 |
+|         103 | Alexander  | Hunold    | not available | 590.423.4567 | 1987-06-20 | IT_PROG |   9900 |       NULL |        103 |            60 |              0 |
+|         104 | Bruce      | Ernst     | not available | 590.423.4568 | 1987-06-21 | IT_PROG |   6600 |       NULL |        103 |            60 |              0 |
+|         105 | David      | Austin    | not available | 590.423.4569 | 1987-06-22 | IT_PROG |   5280 |       NULL |        103 |            60 |              0 |
+|         106 | Valli      | Pataballa | not available | 590.423.4560 | 1987-06-23 | IT_PROG |   5280 |       NULL |        103 |            60 |              0 |
+|         107 | Diana      | Lorentz   | not available | 590.423.5567 | 1987-06-24 | IT_PROG |   4620 |       NULL |        114 |            30 |              0 |
+|         108 | Nancy      | Greenberg | not available | 515.124.4569 | 1987-06-25 | SA_MAN  |  13200 |       NULL |        145 |            80 |              0 |
+|         109 | Daniel     | Faviet    | not available | 515.124.4169 | 1987-06-26 | SA_MAN  |   9900 |       NULL |        145 |            80 |              0 |
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+
+Q12.Write a query to display the name (first_name, last_name) and salary for
+all employees whose salary is not in the range $10,000 through $15,000
+mysql> select  first_name,last_name,salary from employee
+    -> where salary not between 10000 and 15000;
++------------+-----------+--------+
+| first_name | last_name | salary |
++------------+-----------+--------+
+| Steven     | King      |  26400 |
+| Neena      | Kochhar   |  18700 |
+| Lex        | De Haan   |  18700 |
+| Alexander  | Hunold    |   9900 |
+| Bruce      | Ernst     |   6600 |
+| David      | Austin    |   5280 |
+| Valli      | Pataballa |   5280 |
+| Diana      | Lorentz   |   4620 |
+| Daniel     | Faviet    |   9900 |
++------------+-----------+--------+
+
+Q13.Write a query to display the name (first_name, last_name) and
+department ID of all employees in departments 30 or 100 in ascending
+order.
+mysql> select  first_name,last_name, department_id from employee
+    ->  where  department_id in (30,100)
+    -> order by  department_id;
++------------+-----------+---------------+
+| first_name | last_name | department_id |
++------------+-----------+---------------+
+| Diana      | Lorentz   |            30 |
++------------+-----------+---------------+
+
+Q14.Write a query to display the name (first_name, last_name) and salary for
+all employees whose salary is not in the range $10,000 through $15,000
+and are in department 30 or 100.
+mysql> select  first_name,last_name,salary from employee
+    -> where salary not between 10000 and 15000
+    -> and department_id in (30,100);
++------------+-----------+--------+
+| first_name | last_name | salary |
++------------+-----------+--------+
+| Diana      | Lorentz   |   4620 |
++------------+-----------+--------+
+
+Q15.Write a query to display the name (first_name, last_name) and hire date
+for all employees who were hired in 1987.
+mysql> select  first_name,last_name,hire_date from employee
+    -> where year(hire_date)=1987;
++------------+-----------+------------+
+| first_name | last_name | hire_date  |
++------------+-----------+------------+
+| Steven     | King      | 1987-06-17 |
+| Neena      | Kochhar   | 1987-06-18 |
+| Lex        | De Haan   | 1987-06-19 |
+| Alexander  | Hunold    | 1987-06-20 |
+| Bruce      | Ernst     | 1987-06-21 |
+| David      | Austin    | 1987-06-22 |
+| Valli      | Pataballa | 1987-06-23 |
+| Diana      | Lorentz   | 1987-06-24 |
+| Nancy      | Greenberg | 1987-06-25 |
+| Daniel     | Faviet    | 1987-06-26 |
++------------+-----------+------------+
+
+Q16.Write a query to display the first_name of all employees who have both
+"b" and "c" in their first name.
+mysql> select first_name from employee
+    -> where first_name like"%b%"
+       and first_name like"%c%";
+
+Q17.Write a query to display the last name, job, and salary for all employees 
+whose job is that of a Programmer or a Shipping Clerk, and whose salary 
+is not equal to $4,500, $10,000, or $15,000.
+mysql> select last_name,job_id,salary from employee
+    -> where JOB_ID in("Purchasing","Shipping")
+    -> and salary not in (4500 ,10000 ,15000);
+
+Q18.Write a query to display the last name of employees whose names have
+exactly 6 characters.
+mysql> select last_name from employee
+    -> where last_name like "______";
++-----------+
+| last_name |
++-----------+
+| Hunold    |
+| Austin    |
+| Faviet    |
++-----------+
+
+Q19.Write a query to display the last name of employees having 'e' as the third
+character.
+mysql> select  last_name from employee
+    -> where  last_name like"%e__";
++-----------+
+| last_name |
++-----------+
+| Greenberg |
++-----------+
+
+Q20.Write a query to display the jobs/designations available in the employees 
+table.
+mysql> select distinct JOB_ID from employee;
++---------+
+| JOB_ID  |
++---------+
+| AD_PRES |
+| AD_VP   |
+| IT_PROG |
+| SA_MAN  |
++---------+
+
+Q21.Write a query to select all record from employees where last name in
+'BLAKE', 'SCOTT', 'KING' and 'FORD'.
+mysql> select * from employee
+    -> where  last_name in("BLAKE","SCOTT","KING","FORD");
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+| employee_id | first_name | last_name | email         | phone_number | hire_date  | JOB_ID  | salary | commission | manager_id | department_id | COMMISSION_PCT |
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+|         100 | Steven     | King      | not available | 515.123.4567 | 1987-06-17 | AD_PRES |  26400 |       NULL |        200 |            10 |              0 |
++-------------+------------+-----------+---------------+--------------+------------+---------+--------+------------+------------+---------------+----------------+
+

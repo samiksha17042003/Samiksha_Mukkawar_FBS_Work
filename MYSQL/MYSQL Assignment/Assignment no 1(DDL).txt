@@ -1,0 +1,254 @@
+Q1.
+show databases;
++--------------------+
+| Database           |
++--------------------+            
+| company            |
+| fruits             |
+| information_schema |
+| ipl                |
+| ipl25              |
+| mysql              |
+| parentchild        |
+| performance_schema |          
+| sept25             |
+| sys                |
+|                    |
++--------------------+
+
+Q2.Write an SQL statement to create a simple table countries including columns
+country_id,country_name and region_id.
+mysql> create table countries
+    -> (country_id int,country_name varchar(20),region_id int );
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | YES  |     | NULL    |       |
+| country_name | varchar(20) | YES  |     | NULL    |       |
+| region_id    | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+Q3.Write an SQL statement to create a table named jobs including columns
+job_id, job_title, min_salary, max_salary and check whether the
+max_salary amount exceeding the upper limit 25000. Also set job_id as
+primary key and entering null values for job_title is not allowed.
+->  create table jobs
+-> (job_id int,job_title varchar(20),min_salary int,max_salary int);
+
+mysql> desc jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int         | YES  |     | NULL    |       |
+| job_title  | varchar(20) | YES  |     | NULL    |       |
+| min_salary | int         | YES  |     | NULL    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+mysql> alter table jobs
+    -> add primary key(job_id);
+
+mysql> desc jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int         | NO   | PRI | NULL    |       |
+| job_title  | varchar(20) | YES  |     | NULL    |       |
+| min_salary | int         | YES  |     | NULL    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+mysql> alter table jobs
+    -> modify column job_title varchar(20) not null;
+
+mysql> desc jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int         | NO   | PRI | NULL    |       |
+| job_title  | varchar(20) | NO   |     | NULL    |       |
+| min_salary | int         | YES  |     | NULL    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+mysql> alter table jobs
+    -> modify column max_salary int check(max_salary<=25000);
+
+mysql> desc jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int         | NO   | PRI | NULL    |       |
+| job_title  | varchar(20) | NO   |     | NULL    |       |
+| min_salary | int         | YES  |     | NULL    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+Q4.Write a SQL statement to create a table named job_histry including columns
+employee_id, start_date, end_date, job_id and department_id.
+-> create table job_histry
+-> (employee_id int,start_date date,end_date date,job_id int,department_id int);
+
+
+mysql> desc job_histry;
++---------------+------+------+-----+---------+-------+
+| Field         | Type | Null | Key | Default | Extra |
++---------------+------+------+-----+---------+-------+
+| employee_id   | int  | YES  |     | NULL    |       |
+| start_date    | date | YES  |     | NULL    |       |
+| end_date      | date | YES  |     | NULL    |       |
+| job_id        | int  | YES  |     | NULL    |       |
+| department_id | int  | YES  |     | NULL    |       |
++---------------+------+------+-----+---------+-------+
+
+Q5.Write an SQL statement to alter a table named countries to make sure that no
+duplicate data against column country_id will be allowed at the time of
+insertion.
+-> alter table countries
+-> modify column country_id int unique;
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | YES  | UNI | NULL    |       |
+| country_name | varchar(20) | YES  |     | NULL    |       |
+| region_id    | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+Q6.Write an SQL statement to create a table named jobs including columns job_id,
+job_title, min_salary and max_salary, and make sure that, the default value
+for job_title is blank and min_salary is 8000 and max_salary is NULL will be
+entered automatically at the time of insertion if no value assigned for the
+specified columns.
+-> create table job
+    -> (job_id int,job_title varchar(20) default '',
+    -> min_salary int default 8000,
+    -> max_salary int default null);
+
+
+mysql> desc job;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int         | YES  |     | NULL    |       |
+| job_title  | varchar(20) | YES  |     |         |       |
+| min_salary | int         | YES  |     | 8000    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+Q7.Create a Department table with following structure
+create table department
+    -> (department_id decimal(4,0),
+    -> department_name varchar(20),
+    -> manager_id  decimal(6,0),
+    -> location_id  decimal(4,0) not null,
+    -> primary key(department_id,manager_id));
+
+alter table department
+    -> modify column department_id decimal(4,0) default 0,
+    ->  modify column manager_id decimal(4,0) default 0;
+
+mysql> desc department;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | decimal(4,0) | NO   | PRI | 0       |       |
+| department_name | varchar(20)  | YES  |     | NULL    |       |
+| manager_id      | decimal(4,0) | NO   | PRI | 0       |       |
+| location_id     | decimal(4,0) | NO   |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+
+mysql> desc department;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| department_id   | decimal(4,0) | NO   | PRI | NULL    |       |
+| department_name | varchar(20)  | YES  |     | NULL    |       |
+| manager_id      | decimal(6,0) | NO   | PRI | NULL    |       |
+| location_id     | decimal(4,0) | NO   |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+
+Q8.Write an SQL statement to create a table employees including columns
+employee_id, first_name, last_name, email, phone_number hire_date, job_id,
+salary, commission, manager_id and department_id and make sure that, the
+employee_id column does not contain any duplicate value at the time of
+insertion and the foreign key columns combined by department_id and
+manager_id columns contain only those unique combination values, which
+combinations are exists in the departments table.
+ -> create table employee
+ -> (employee_id int,first_name varchar(20),last_name varchar(20),email varchar(20),phone_number int,hire_date date,job_id int,salary int,
+    -> commission int,manager_id int,department_id int);
+
+mysql> desc employee
+    -> ;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | int         | YES  |     | NULL    |       |
+| first_name    | varchar(20) | YES  |     | NULL    |       |
+| last_name     | varchar(20) | YES  |     | NULL    |       |
+| email         | varchar(20) | YES  |     | NULL    |       |
+| phone_number  | int         | YES  |     | NULL    |       |
+| hire_date     | date        | YES  |     | NULL    |       |
+| job_id        | int         | YES  |     | NULL    |       |
+| salary        | int         | YES  |     | NULL    |       |
+| commission    | int         | YES  |     | NULL    |       |
+| manager_id    | int         | YES  |     | NULL    |       |
+| department_id | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+ alter table employee
+    -> add primary key( employee_id);
+
+
+mysql> desc employee;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | int         | NO   | PRI | NULL    |       |
+| first_name    | varchar(20) | YES  |     | NULL    |       |
+| last_name     | varchar(20) | YES  |     | NULL    |       |
+| email         | varchar(20) | YES  |     | NULL    |       |
+| phone_number  | int         | YES  |     | NULL    |       |
+| hire_date     | date        | YES  |     | NULL    |       |
+| job_id        | int         | YES  |     | NULL    |       |
+| salary        | int         | YES  |     | NULL    |       |
+| commission    | int         | YES  |     | NULL    |       |
+| manager_id    | int         | YES  |     | NULL    |       |
+| department_id | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+create table departments
+    -> (manager_id int,department_id int,department_name varchar(20),
+    -> primary key(manager_id ,department_id ));
+
+
+mysql> desc departments;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| manager_id      | int         | NO   | PRI | NULL    |       |
+| department_id   | int         | NO   | PRI | NULL    |       |
+| department_name | varchar(20) | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+mysql> alter table employee
+    -> add foreign key(manager_id, department_id)
+    -> references departments(manager_id, department_id);
+
+mysql> desc employee;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | int         | NO   | PRI | NULL    |       |
+| first_name    | varchar(20) | YES  |     | NULL    |       |
+| last_name     | varchar(20) | YES  |     | NULL    |       |
+| email         | varchar(20) | YES  |     | NULL    |       |
+| phone_number  | int         | YES  |     | NULL    |       |
+| hire_date     | date        | YES  |     | NULL    |       |
+| job_id        | int         | YES  |     | NULL    |       |
+| salary        | int         | YES  |     | NULL    |       |
+| commission    | int         | YES  |     | NULL    |       |
+| manager_id    | int         | YES  | MUL | NULL    |       |
+| department_id | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+

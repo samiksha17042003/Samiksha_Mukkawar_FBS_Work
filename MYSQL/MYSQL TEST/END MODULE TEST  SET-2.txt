@@ -1,0 +1,52 @@
+TEST-2 SET-2
+
+Q1
+select * from actor;
+
+
+Q2
+select * from movie
+order by IMDB_rating desc;
+
+
+Q3
+select name from actor 
+where gender="male" and no_of_awards>10;
+
+
+Q4 select m_id,role from movie_actor
+ where actor_id=101;
+
+
+Q5
+select * from actor
+where nationality!="Indian";
+
+
+Q6
+select m_id,count(a_id) from movie_actor
+group by m_id;
+
+
+Q7
+select role from movie_actor
+where a_id=(select a_id from actor where name="Amir Khan")
+and m_id=(select m_id from movie where mname= '3 idiots');
+
+
+Q8
+select * from movie
+order by t_budget limit 1;
+
+
+Q9
+select gender,count(*) from actor
+group by gender;
+
+
+Q10
+select role from movie_actor
+where m_id=3;
+
+
+
