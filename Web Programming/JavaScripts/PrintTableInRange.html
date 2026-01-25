@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #maincontainer{
+
+   display:flex;
+   gap: 5px;
+   flex-wrap: wrap;
+
+    }
+    div{
+        border:3px solid greenyellow
+    }
+    .even{
+        background-color:rebeccapurple;
+    }
+    .odd{
+     background-color:burlywood;
+    }
+    </style>
+    <script>
+ function printTable(){
+ start=parseInt(document.getElementById("inp1").value)
+ end=parseInt(document.getElementById("inp2").value)
+ str="<div id='maincontainer'>"
+ for(j=start;j<=end;j++){
+    if(j%2==0)
+ str=str+"<div class='even'><table boarder='1'>"
+ else
+ str=str+"<div class='odd'><table boarder='1'>"
+ for(i=1;i<=10;i++){
+ res=j*i
+//  str=str+num+"*"+i+"="+res+"<br>"
+ str=str+`<tr><td>${j}</td><td>*</td><td>${i}</td><td>=</td><td>${res}</td></tr>`
+ }
+
+ str=str+"</table></div>"
+ console.log(str)
+ }
+ str=str+"</div>"//maincontainer div close
+ document.getElementById("op").innerHTML = str
+ }
+    </script>
+</head>
+<body>
+    Enter Start<input type="text" id="inp1">
+    Enter End<input type="text" id="inp2">
+    <br>
+   <button onclick="printTable()">printTable</button>
+   <br>
+   <span  id="op">
+   </span>
+</body>
+</html>

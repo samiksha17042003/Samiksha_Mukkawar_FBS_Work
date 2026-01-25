@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <style>
+    div{
+        margin:auto;
+        border:10px solid blueviolet;
+        width: 500px;
+        padding: 50px;
+
+    }
+    /* div input{
+        width: 100px;
+    } */
+
+     </style>
+     <script>
+     function Operation(op){
+        no1=parseInt(document.getElementById("id1").value)//input element
+        no2=parseInt(document.getElementById("id2").value)
+        if(op=='+'){
+            res=no1+no2
+        }
+        else if(op=='-'){
+            res=no1-no2
+        }
+        else if(op=='*'){
+            res=no1*no2
+        }
+        else{
+            res=no1/no2
+        }
+        document.getElementById("res").innerHTML="Result is:"+res
+     }
+    </script>
+</head>
+<body>
+<div>
+Enter num1<input type="text" id="id1">
+<br>
+Enter num2<input type="text" id="id2">
+<br>
+    <button id="btn" onclick="Operation('+')">Add</button>
+     <button id="btn" onclick="Operation('-')">Sub</button>
+      <button id="btn" onclick="Operation('*')">Mul</button>
+       <button id="btn" onclick="Operation('/')">Div</button>
+    <br>
+    <span id="res"
+>
+    </span>
+</div>
+</body>
+</html>

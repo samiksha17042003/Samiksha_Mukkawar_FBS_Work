@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+     function addition()
+     {
+
+
+    no1=parseInt(document.getElementById("id1").value)//input element
+    no2=parseInt(document.getElementById("id1").value)
+    res=no1+no2
+    console.log(res)
+    document.getElementById("res").innerHTML="Addition is:"+res
+     }
+
+    </script>
+</head>
+<body>
+
+Enter num1<input type="text" id="id1">
+<br>
+Enter num2<input type="text" id="id2">
+<br>
+    <button id="btn" onclick="addition()">Add</button>
+    <br>
+    <span id="res"
+>
+    </span>
+</body>
+</html>
